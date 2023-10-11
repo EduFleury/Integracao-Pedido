@@ -1,0 +1,85 @@
+<style>
+
+    .barcode {
+        display: block;
+        position: relative;
+    }
+
+    .barcode input.form-control {
+    font-size:18px !important;
+    padding-right: 25px !important;
+    padding: 18px 18px 18px 14px;
+    }
+
+    .barcode ul li div table {
+    outline: none !important;
+    }
+
+    .barcode :not(.button-mode) sk-icon {
+    position: absolute;
+    top: 55%;
+    right: 4px;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    font-size: inherit;
+    cursor: pointer;
+    }
+
+</style>
+
+<sk-dataset entity-name="AD_TGFEDUPOP" sk-dataset-created="ctrl.onDatasetCreated(dataset)">
+    <sk-field pattern="*"></sk-field>
+    <!--<sk-field pattern="CODIBGE,CODPAIS" path="UnidadeFederativa"></sk-field>-->
+</sk-dataset>
+
+<sk-vbox flex>
+    <sk-hbox flex>
+
+        <sk-vbox flex sk-border="1px solid #ccc">
+
+            <sk-simple-form sk-columns="1" no-padding>
+                <sk-simple-item class="barcode">
+                    <sk-text-input sk-id="txtCodBarras" sk-value="ctrl.txtCodBarra" sk-placeholder="Inserir Cód. Barras" ng-keydown="ctrl.keydownHandler($event)" ></sk-text-input>
+                    <sk-icon font-icon="barcode" sk-font-size="25px" ng-click="ctrl.incluir()"></sk-icon>
+                </sk-simple-item>
+            </sk-simple-form>
+
+            <sk-divider></sk-divider>
+
+            <sk-top-bar layout-padding class="high-contrast-panel">
+
+                <sk-hbox flex>
+                    
+                    <sk-grid-config sk-config-name="{{ ::ctrl.gridConfigId}}"></sk-grid-config>
+                    <sk-navigator dataset="ctrl.dsSerie" sk-add-function="false"
+                    sk-show-navigation="true"
+                    sk-show-add-button="false"
+                    sk-show-copy-button="false"
+                    sk-show-remove-button="true"
+                    sk-show-refresh-button="true"
+                    sk-show-cancel-button="false"
+                    sk-show-save-button="false"
+                    sk-edit-unique-record="false"
+                    sk-save-handler="false"
+                    sk-show-edit-button="false"
+                    ></sk-navigator>
+                    
+
+                    <sk-hbox flex layout-align="end" gap="5">
+                        <sk-btn-other-options sk-other-options="ctrl.otherOptionsLoader()"></sk-btn-other-options>
+                        <sk-action-button sk-entity-name="SerieProduto" sk-context="ctrl.datasetActionButtonContext"></sk-action-button>
+                        <sk-rows-counter sk-dataset="ctrl.dsSerie" ></sk-rows-counter>
+                    
+                    </sk-hbox>
+                </sk-hbox>
+            </sk-top-bar>
+
+
+            <sk-datagrid sk-dataset="ctrl.dsSerie" sk-editable="false" sk-margin="10" sk-config-name="{{ ::ctrl.gridConfigId}}"></sk-datagrid>
+            
+
+        </sk-vbox>
+        
+    </sk-hbox>
+</sk-vbox>
+
